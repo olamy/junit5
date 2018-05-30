@@ -21,18 +21,13 @@ jdk:
   - openjdk10
   - openjdk-ea
 
-env:
-  - JACOCO='-PenableJaCoCo'
-  - INSTALL='publishToMavenLocal'
-
-matrix:
-  exclude:
-    - os: linux
-      jdk: openjdk-ea
-      env: JACOCO='-PenableJaCoCo'
-    - os: osx
-      jdk: openjdk-ea
-      env: JACOCO='-PenableJaCoCo'
+jobs:
+  include:
+    - stage: aftermath
+      os: linux
+      jdk: openjdk10
+      env: JACOCO='-PenableJaCoCo' INSTALL='publishToMavenLocal'
+      script: ./gradlew --scan --stacktrace --warning-mode=all ${JACOCO} build ${INSTALL}
 
 script:
 # Display Gradle, Groovy, JVM and other versions
