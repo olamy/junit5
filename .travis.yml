@@ -21,13 +21,15 @@ jdk:
   - openjdk10
   - openjdk-ea
 
-jobs:
+matrix:
   include:
-    - stage: aftermath
-      os: linux
+    - os: linux
       jdk: openjdk10
       env: JACOCO='-PenableJaCoCo' INSTALL='publishToMavenLocal'
-      script: ./gradlew --scan --stacktrace --warning-mode=all ${JACOCO} build ${INSTALL}
+
+install:
+# Don't let Travis CI execute './gradlew assemble' by default
+ - true
 
 script:
 # Display Gradle, Groovy, JVM and other versions
