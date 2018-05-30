@@ -22,6 +22,9 @@ jdk:
   - openjdk-ea
 
 matrix:
+  exclude:
+    - os: linux
+      jdk: openjdk10
   include:
     - os: linux
       jdk: openjdk10
